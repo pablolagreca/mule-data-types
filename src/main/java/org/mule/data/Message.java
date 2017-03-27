@@ -15,29 +15,29 @@ import static java.util.Objects.requireNonNull;
  */
 public class Message {
 
-    private TypedValue attributes;
-    private TypedValue payload;
+  private TypedValue attributes;
+  private TypedValue payload;
 
-    /**
-     * Creates an instance of the DTO.
-     *
-     * @param attributes {@link TypedValue} for the attributes. Non null.
-     * @param payload {@link TypedValue} for the payload. Non null.
-     */
-    public Message(TypedValue attributes, TypedValue payload) {
-        requireNonNull(attributes, "attributes cannot be null");
-        requireNonNull(attributes, "payload cannot be null");
+  /**
+   * Creates an instance of the DTO.
+   *
+   * @param attributes {@link TypedValue} for the attributes. Non null.
+   * @param payload {@link TypedValue} for the payload. Non null.
+   */
+  public Message(TypedValue attributes, TypedValue payload) {
+    requireNonNull(attributes, "attributes cannot be null");
+    requireNonNull(attributes, "payload cannot be null");
 
-        this.attributes = attributes;
-        this.payload = payload;
-    }
+    this.attributes = attributes;
+    this.payload = payload;
+  }
 
-    public TypedValue getAttributes() {
-        return attributes;
-    }
+  public TypedValue getAttributes() {
+    return attributes;
+  }
 
-    public TypedValue getPayload() {
-        return payload;
-    }
+  public TypedValue getPayload() {
+    return payload;
+  }
 
 }

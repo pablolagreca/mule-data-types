@@ -15,29 +15,29 @@ import static java.util.Objects.requireNonNull;
  */
 public class DataType {
 
-    private String type;
-    private String mediaType;
+  private String type;
+  private String mediaType;
 
-    /**
-     * Creates an instance of the DTO.
-     *
-     * @param type the {@link Class} that defines the type. Non null.
-     * @param mediaType the media type from {@link org.mule.runtime.api.metadata.DataType} as {@link String}. Non null.
-     */
-    public DataType(String type, String mediaType) {
-        requireNonNull(type, "type cannot be null");
-        requireNonNull(mediaType, "mediaType cannot be null");
+  /**
+   * Creates an instance of the DTO.
+   *
+   * @param type the {@link Class} that defines the type. Non null.
+   * @param mediaType the media type from {@link org.mule.runtime.api.metadata.DataType} as {@link String}. Non null.
+   */
+  public DataType(String type, String mediaType) {
+    requireNonNull(type, "type cannot be null");
+    requireNonNull(mediaType, "mediaType cannot be null");
 
-        this.type = type;
-        this.mediaType = mediaType;
-    }
+    this.type = type;
+    this.mediaType = mediaType;
+  }
 
-    public String getType() {
-        return type;
-    }
+  public String getType() {
+    return type;
+  }
 
-    public String getMediaType() {
-        return mediaType;
-    }
+  public String getMediaType() {
+    return mediaType;
+  }
 
 }

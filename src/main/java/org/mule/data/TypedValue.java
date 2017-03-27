@@ -15,33 +15,33 @@ import static java.util.Objects.requireNonNull;
  */
 public class TypedValue {
 
-    private DataType dataType;
+  private DataType dataType;
 
-    /**
-     * Null only when dataType.type is a Message
-     */
-    private byte[] content;
+  /**
+   * Null only when dataType.type is a Message
+   */
+  private byte[] content;
 
-    /**
-     * Creates an instance of the DTO.
-     *
-     * @param dataType {@link DataType} that defines the type of the content.
-     * @param content content as {@code byte[]}.
-     */
-    public TypedValue(DataType dataType, byte[] content) {
-        requireNonNull(dataType, "dataType cannot be null");
-        requireNonNull(dataType, "content cannot be null");
+  /**
+   * Creates an instance of the DTO.
+   *
+   * @param dataType {@link DataType} that defines the type of the content.
+   * @param content content as {@code byte[]}.
+   */
+  public TypedValue(DataType dataType, byte[] content) {
+    requireNonNull(dataType, "dataType cannot be null");
+    requireNonNull(dataType, "content cannot be null");
 
-        this.dataType = dataType;
-        this.content = content;
-    }
+    this.dataType = dataType;
+    this.content = content;
+  }
 
-    public DataType getDataType() {
-        return dataType;
-    }
+  public DataType getDataType() {
+    return dataType;
+  }
 
-    public byte[] getContent() {
-        return content;
-    }
+  public byte[] getContent() {
+    return content;
+  }
 
 }

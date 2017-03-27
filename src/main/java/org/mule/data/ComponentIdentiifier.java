@@ -15,29 +15,29 @@ import static java.util.Objects.requireNonNull;
  */
 public class ComponentIdentiifier {
 
-    private String namespace;
-    private String name;
+  private String namespace;
+  private String name;
 
-    /**
-     * Creates an instance of the identifer.
-     *
-     * @param namespace defines the namespace of component. Non null.
-     * @param name defines the name of the component. Non null.
-     */
-    public ComponentIdentiifier(String namespace, String name) {
-        requireNonNull(namespace, "namespace cannot be null");
-        requireNonNull(name, "name cannot be null");
+  /**
+   * Creates an instance of the identifer.
+   *
+   * @param namespace defines the namespace of component. Non null.
+   * @param name defines the name of the component. Non null.
+   */
+  public ComponentIdentiifier(String namespace, String name) {
+    requireNonNull(namespace, "namespace cannot be null");
+    requireNonNull(name, "name cannot be null");
 
-        this.namespace = namespace;
-        this.name = name;
-    }
+    this.namespace = namespace;
+    this.name = name;
+  }
 
-    public String getNamespace() {
-        return namespace;
-    }
+  public String getNamespace() {
+    return namespace;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
 }
