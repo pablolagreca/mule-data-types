@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>mule-alltogether</artifactId>
-        <groupId>org.mule</groupId>
-        <version>4.0-SNAPSHOT</version>
-    </parent>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.mule.types</groupId>
     <artifactId>mule-data-types</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Mule Data Types</name>
+    <description>Mule Data Types for Mule Runtime</description>
+
+    <properties>
+        <javaVersion>1.8</javaVersion>
+        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+
+        <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
+
+        <formatterConfigPath>formatter.xml</formatterConfigPath>
+        <skipVerifications>false</skipVerifications>
+    </properties>
 
     <build>
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -28,7 +37,129 @@
                         <proc>none</proc>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>2.11</version>
+                    <configuration>
+                        <header>com/mycila/maven/plugin/license/templates/CPAL.txt</header>
+                        <properties>
+                            <owner>MuleSoft, Inc</owner>
+                            <project.url>http://www.mulesoft.com</project.url>
+                        </properties>
+                        <includes>
+                            <include>**/*.java</include>
+                        </includes>
+                        <mapping>
+                            <java>SLASHSTAR_STYLE</java>
+                        </mapping>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.marvinformatics.formatter</groupId>
+                    <artifactId>formatter-maven-plugin</artifactId>
+                    <version>${javaFormatter.plugin.version}</version>
+                    <configuration>
+                        <compilerCompliance>${javaVersion}</compilerCompliance>
+                        <compilerSource>${javaVersion}</compilerSource>
+                        <compilerTargetPlatform>${javaVersion}</compilerTargetPlatform>
+                        <configFile>${basedir}/${formatterConfigPath}</configFile>
+                        <configJsFile>${basedir}/${formatterConfigPath}</configJsFile>
+                        <lineEnding>LF</lineEnding>
+                        <aggregator>false</aggregator>
+                        <executionRoot>true</executionRoot>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>validate</goal>
+                            </goals>
+                            <configuration>
+                                <skipFormatting>${skipVerifications}</skipFormatting>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.marvinformatics.formatter</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <skipVerifications>false</skipVerifications>
+                <skipGpg>false</skipGpg>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <additionalparam>${xDocLint}</additionalparam>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                    <goal>test-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <skip>${skipGpg}</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
