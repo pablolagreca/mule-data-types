@@ -6,9 +6,38 @@
  */
 package org.mule.data;
 
-public class Message
-{
-    private TypedValue attributes;
-    private TypedValue payload;
+import static java.util.Objects.requireNonNull;
+
+/**
+ * DTO for {@link org.mule.runtime.api.message.Message}.
+ *
+ * @since 1.0
+ */
+public class Message {
+
+  private TypedValue attributes;
+  private TypedValue payload;
+
+  /**
+   * Creates an instance of the DTO.
+   *
+   * @param attributes {@link TypedValue} for the attributes. Non null.
+   * @param payload {@link TypedValue} for the payload. Non null.
+   */
+  public Message(TypedValue attributes, TypedValue payload) {
+    requireNonNull(attributes, "attributes cannot be null");
+    requireNonNull(attributes, "payload cannot be null");
+
+    this.attributes = attributes;
+    this.payload = payload;
+  }
+
+  public TypedValue getAttributes() {
+    return attributes;
+  }
+
+  public TypedValue getPayload() {
+    return payload;
+  }
 
 }
